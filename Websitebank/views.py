@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from Websitebank.models import account_user, transaction
+from Websitebank.models import payments, profiles
 from .forms import profileregisterform,transactionforms
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -13,7 +13,19 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="login/")
 def homepage(request):
-    return render(request,'home.html')
+    if request.user.is_authenticated:
+        giver_id = request.user.id
+        giver_transactions = payments.objects.filter(sender_id = giver_id).first()
+        context ={
+        'Payment_id': giver_transactions.payment_id,
+        'Receiver_no': giver_transactions.receiver_no,
+        'amount_tranfer': giver_transactions.amount,
+        'notes_given': giver_transactions.notes
+
+        }
+        return render(request,'home.html',context)
+    else:
+        return render(request,'home.html')
 
 
 def login(request):
@@ -65,22 +77,41 @@ def signup(request):
    return render(request, 'signup.html',context)
 
 @login_required(login_url="login/")
-def payments(request):
-    return render(request, 'payments.html')
-    # if request.method == 'POST':
-    #     payforms = transactionforms(request.POST)
-    #     if payforms.is_valid():
-            
-    #         payforms.save()
-    #         return redirect('bank-transactions')
-    # else:
-    #     payforms = transactionforms()
-    # return render(request,'payments.html',{'payforms':payforms})
-
-# @login_required(login_url="login/")
-# def logout(request):
-    # return redirect('login.html')
-    # return render(request, 'logout.html')
+def payment(request):
+    if request.method == 'POST':
+        payforms = transactionforms(request.POST)
+        confirm_pin = request.POST.get('pin')
+        if payforms.is_valid():
+           # if request.user.is_authenticated():
+                sender_profile = request.user.profiles
+                sender_balance = request.user.profiles.balance
+                sender_pin = request.user.profiles.pin
+                input_pin = request.POST.get('pin')
+                # if sender id matches the input
+                if input_pin == sender_pin : 
+                    balance = payforms.cleaned_data.get('amount')
+                    receiver_no = payforms.cleaned_data.get('receiver_no')
+                    receiver_profile = profiles.objects.filter(card_no = receiver_no).first()
+                    receiver_amount = receiver_profile.balance
+                    new_amount_receiver = receiver_amount + balance
+                    new_amount_sender = sender_balance - balance
+                    receiver_profile.balance = new_amount_receiver
+                    sender_profile.balance = new_amount_sender
+                    sender_profile.save()
+                    receiver_profile.save()
+                    new_transaction = payforms.save(commit = False)
+                    # for initialising sender id 
+                    if new_transaction.sender_id is NULL or new_transaction.sender_id is None:
+                        new_transaction.sender =   request.user 
+                    new_transaction.save()
+                    return redirect('bank-payments')
+                else:
+                    messages.add_message("Please input the correct PIN")
+                    redirect('bank-payments')
+    else:
+        payforms = transactionforms()
+    
+    return render(request,'payments.html',{'forms':payforms} )
 
 @login_required(login_url="login/")
 def profile(request):

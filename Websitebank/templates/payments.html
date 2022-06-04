@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}EJBC Home Page - Payments Page{% endblock %}</title>
@@ -6,12 +8,14 @@
 
 {% block content %}
     <h2 class="title-page">Payments</h2>
-    <form class="payment-form">
-        <input type="text" placeholder="From Account"> <!--default-->
-        <input type="text" placeholder="To Account">
-        <input type="number" placeholder="Transfer Amount">
-        <input type="text" placeholder="Notes">
-        <button type="submit">Transfer</button>
+    <form class="payment-form" method= "POST">
+        {% csrf_token %}
+        {{ forms|crispy }}
+
+        <label>Pin</label>
+        <input type = "password" name = "pin">
+        
+        <button type="submit">Submit</button>
 
     </form>
 {% endblock %}

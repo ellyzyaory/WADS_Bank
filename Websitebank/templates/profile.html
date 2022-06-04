@@ -9,7 +9,8 @@
     <h2 class="title-page">Profile</h2>
     <div class = "profile">
         <h1>Username: {{user.username}} </h1>
-        <a href = "{%url 'bank-logout'%}">Log out</a>
+        <h1>Card No: {{user.profiles.card_no}}</h1>
+        <a class="logout-link" href = "{%url 'bank-logout'%}">Log out</a>
     </div>
 {%else%}
 <a href= "{%url 'bank-login'%}">You must log in to your account <span>Login</span></a>

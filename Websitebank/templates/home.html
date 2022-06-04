@@ -7,6 +7,13 @@
 {% block content %}
     <h2 class="title-page">Transactions</h2>
     <div class="history-page">
-        
+        {%if user.is_authenticated%}
+            <p>{{Payment_id}}</p>
+            <p>{{Receiver_no}}</p>
+            <p>{{amount_transfer}}</p>
+            <p>{{notes_given}}</p>
+        {%else%}
+        <a href= "{%url 'bank-login'%}">You must log in to your account <span>Login</span></a>
+        {%endif%}
     </div>
 {% endblock %}

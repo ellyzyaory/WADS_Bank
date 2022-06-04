@@ -15,12 +15,13 @@ from django.contrib.auth.decorators import login_required
 def homepage(request):
     if request.user.is_authenticated:
         giver_id = request.user.id
-        giver_transactions = payments.objects.filter(sender_id = giver_id).first()
+        giver_transactions = payments.objects.filter(sender_id = giver_id)
         context ={
-        'Payment_id': giver_transactions.payment_id,
-        'Receiver_no': giver_transactions.receiver_no,
-        'amount_tranfer': giver_transactions.amount,
-        'notes_given': giver_transactions.notes
+        'trans': giver_transactions   
+        #'Payment_id': giver_transactions.payment_id,
+        #'Receiver_no': giver_transactions.receiver_no,
+        #'amount_tranfer': giver_transactions.amount,
+        #'notes_given': giver_transactions.notes
 
         }
         return render(request,'home.html',context)

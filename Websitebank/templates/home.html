@@ -8,12 +8,24 @@
     <h2 class="title-page">Transactions</h2>
     <div class="history-page">
         {%if user.is_authenticated%}
-            <p>{{Payment_id}}</p>
-            <p>{{Receiver_no}}</p>
-            <p>{{amount_transfer}}</p>
-            <p>{{notes_given}}</p>
+        <!-- <p>Receiver No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Notes
+        </p> -->
+
+        {%for transactions in trans%}
+        <div class="history">
+                <p class="receiver">Receiver No: {{transactions.receiver_no}}</p>
+                <p>Transfer Amount: Rp. {{transactions.amount}}</p>
+                <p>Notes: {{transactions.notes}}</p>
+            <!-- {{transactions.payment_id}} -->
+            <!-- <p>{{transactions.receiver_no}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{transactions.amount}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{transactions.notes}}</p> -->
+        </div>
+        {%endfor%}
         {%else%}
-        <a href= "{%url 'bank-login'%}">You must log in to your account <span>Login</span></a>
+            <a href= "{%url 'bank-login'%}">You must log in to your account <span>Login</span></a>
         {%endif%}
     </div>
 {% endblock %}

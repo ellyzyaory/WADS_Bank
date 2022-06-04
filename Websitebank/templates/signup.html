@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}EJBC Register Page{% endblock %}</title>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+</head>
+<body>
+    <div class="register-page">
+            <h2 class="brand-auth">EJBC</h2>
+            <form class="form" method="post">
+                {% csrf_token %}
+                {{ userdata|crispy }}
+                {{ bankdata|crispy }}
+                <button type="submit">Register</button>
+            </form>
+            {%if messages%}
+            {%for message in messages%}
+                <div class = "alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+            {%endif%}
+    </div>
+    <div class="go-to-login">
+        <a href="/login" class="link">Already have an account? <span>Login</span></div>
+    </div>
+    </body>
+    </html>

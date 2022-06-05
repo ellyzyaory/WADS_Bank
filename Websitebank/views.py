@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from Websitebank.models import payments, profiles

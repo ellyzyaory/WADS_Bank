@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import profiles, payments
+from .models import profiles, payments,profileimages
 # Register your models here.
 
 admin.site.register(profiles)
 admin.site.register(payments)
+admin.site.register(profileimages)

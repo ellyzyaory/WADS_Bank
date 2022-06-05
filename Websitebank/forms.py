@@ -1,6 +1,6 @@
 from tkinter.tix import Tree
 from django import forms
-from .models import profiles, payments
+from .models import profiles, payments, profileimages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -15,5 +15,7 @@ class transactionforms(forms.ModelForm):
         model = payments
         fields = ['receiver_no','amount','notes']
 
- 
- 
+class imageform(forms.ModelForm):
+    class Meta:
+        model = profileimages
+        fields = ["image"]

@@ -182,14 +182,12 @@ span {
 }
 
 .history {
-    background-color: #d3d3d3;
+    background-color: #ececec;
     margin: 0 0 15px;
-    border: 2px solid #d3d3d3;
+    border: 2px solid #ececec;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-
-
 }
 
 p {
@@ -198,4 +196,18 @@ p {
 
 .receiver {
     font-weight: bold;
+}
+
+.upload-image button {
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    width: 30%;
+    border-radius: 5px;
+    border: 0;
+    padding: 8px;
+    color: #FFFFFF;
+    font-size: 14px;
+    background-color: #0094ff;
+    margin-bottom: 15px;
 }

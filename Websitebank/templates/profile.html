@@ -11,11 +11,11 @@
         <h1>Username: {{user.username}} </h1>
         <h1>Card No: {{user.profiles.card_no}}</h1>
         <!-- {{ user.profiles.profileimages.image}} -->
-        <form method = "post" enctype="multipart/form-data">
+        <form class="upload-image" method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Upload</button>
-          </form>
+        </form>
         <a class="logout-link" href = "{%url 'bank-logout'%}">Log out</a>
     </div>
 {%else%}

@@ -149,3 +149,9 @@ LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL = '/' 
 
 django_heroku.settings(locals())
+
+
+try:
+    from backports import zoneinfo
+except ImportError:
+    import zoneinfo

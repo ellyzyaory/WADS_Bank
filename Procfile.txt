@@ -1,1 +1,1 @@
-web: gunicorn ejbc.wsgi
+web: gunicorn EltonJohnsBank.wsgi

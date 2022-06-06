@@ -1,8 +1,8 @@
 from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from Websitebank.models import payments, profiles, profileimages
-from .forms import profileregisterform,transactionforms,imageform
+from Websitebank.models import payments, profiles
+from .forms import profileregisterform,transactionforms
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -116,21 +116,24 @@ def payment(request):
 
 @login_required(login_url="login/")
 def profile(request):
-    if request.user.is_authenticated:
-        user_id = request.user.id
-        image = profileimages.objects.filter(profile_id=user_id)
-        if request.method == 'POST':
-            confirm_image = request.POST.get(image)
-            form = imageform(request.POST, request.FILES)
+    # if request.user.is_authenticated:
+    #     user_id = request.user.id
+    #     image = profileimages.objects.filter(profile_id=user_id)
+    #     context ={
+    #         'img': image
+    #     }
+    #     if request.method == 'POST':
+            # confirm_image = request.POST.get(image)
+            # form = imageform(request.POST, request.FILES)
 
-            if form.is_valid():
-                image_save = form.save(commit = False)
-                if image_save.profile_id is NULL or image_save.profile_id is None:
-                    image_save.profile =   request.user.profiles
-                    image_save.save()
+            # if form.is_valid():
+            #     image_save = form.save(commit = False)
+            #     if image_save.profile_id is NULL or image_save.profile_id is None:
+            #         image_save.profile =   request.user.profiles
+            #         image_save.save()
                 # return HttpResponse('successfully uploaded')
-        else:
-            form = imageform()
-        return render(request, 'profile.html', {"form": form})
-    else:
-        return render(request, 'profile.html')
+    #     else:
+    #         form = imageform()
+    #     return render(request, 'profile.html', {"form": form})
+    # else:
+    return render(request, 'profile.html')

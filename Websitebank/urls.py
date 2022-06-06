@@ -9,4 +9,6 @@ urlpatterns = [
     path('payments/', views.payment, name= "bank-payments"),
     path('logout/', auth_views.LogoutView.as_view(template_name = "logout.html"),name= "bank-logout"),
     path('profile/', views.profile, name = 'bank-profile'),
+    # path('nodeflux/', views.nodeflux, name="bank-nodeflux"),
+
 ]

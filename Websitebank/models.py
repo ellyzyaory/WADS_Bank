@@ -13,9 +13,16 @@ class profiles(models.Model):
     card_no = models.CharField(primary_key = True,max_length=16, blank = False, unique=True)
     balance = models.DecimalField(max_digits=15, decimal_places=3,blank= False)
     
-class profileimages(models.Model):
-    profile = models.ForeignKey(profiles, on_delete=models.CASCADE)    
-    image = models.ImageField(upload_to = "images/", default=None)
+# class profilepic(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     image = models.ImageField(default = None, upload_to = "profile_pics")
+
+#     def str(self):
+#         return f'{self.user.username} Profile'
+
+# class photos(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     image = models.ImageField(upload_to='nodeflux_photos/')
 
 
 class payments(models.Model):

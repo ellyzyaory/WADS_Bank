@@ -1,1 +1,1 @@
-web: gunicorn EltonJohnsBank.wsgi
+web: gunicorn EltonJohnsBank.wsgi.application

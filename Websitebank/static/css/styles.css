@@ -216,3 +216,24 @@ p {
     width: 250px;
     height: 250px;
 }
+
+.alert {
+    padding: 20px;
+    background-color: #90ee90;
+    color: #013220 ;
+  }
+  
+.close {
+    margin-left: 15px;
+    color: #013220 ;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+.close:hover {
+    color: white;
+  }

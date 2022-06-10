@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_nph)5bo-$(-*0z_m370@=zyy_b&5)en-y*8^r08_0n+3qqdb&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -148,10 +148,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL = '/' 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 
-try:
-    from backports import zoneinfo
-except ImportError:
-    import zoneinfo
+# try:
+#     from backports import zoneinfo
+# except ImportError:
+#     import zoneinfo

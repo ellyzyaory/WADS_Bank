@@ -107,7 +107,7 @@ def payment(request):
                     new_transaction.save()
                     return redirect('bank-payments')
                 else:
-                    messages.add_message("Please input the correct PIN")
+                    messages.info(request, "Please input the correct PIN")
                     redirect('bank-payments')
     else:
         payforms = transactionforms()
